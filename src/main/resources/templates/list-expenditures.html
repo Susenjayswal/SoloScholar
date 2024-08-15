@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>All Expenditures</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+</head>
+<body>
+    <div th:insert="comman/header :: header"></div>
+    <div class="container my-2">
+        <div class="container my-5">
+            <p class="my-5">
+                <a href="/addExpenditures" class="btn btn-dark">
+                    <i class="fas fa-user-plus ml-2"> Add Expenditures </i>
+                </a>
+            </p>
+            <div class="col-md-12">
+                <h2 th:if="${expenditures.content.isEmpty()}">No record found !!</h2>
+                <div th:unless="${expenditures.content.isEmpty()}">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Purchase Date</th>
+                                <th>Invoice Number</th>                                
+                                <th>Category</th>
+                                <th>Type</th>
+                                <th>Quantity</th>
+                                <th>Rate</th>                                
+                                <th>Total Amount</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="expend : ${expenditures.content}">
+                                <td th:text="${expend.id}"></td>
+                                <td th:text="${#dates.format(expend.date, 'dd-MM-yyyy')}"></td>
+                                <td th:text="${expend.invoiceNumber}"></td>
+                                <td th:text="${expend.category}"></td>
+                                <td th:text="${expend.type}"></td>
+                                <td th:text="${expend.quantity}"></td>
+                                <td th:text="${expend.rate}"></td>
+                                <td th:text="${expend.totalPrice}"></td>
+                                <td>
+                                    <a th:href="@{/updateExpenditure/{id}(id=${expend.id})}" class="btn btn-warning">
+                                        <i class="fas fa-user-edit ml-2"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a th:href="@{/remove-expenditure/{id}(id=${expend.id})}" class="btn btn-danger">
+                                        <i class="fas fa-user-times ml-2"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div th:if="${expenditures.totalPages > 1}" class="pagination">
+                        <ul class="pagination">
+                            <li th:each="pageNumber : ${pageNumbers}" 
+                                th:classappend="${pageNumber == expenditures.number + 1} ? 'active'">
+                                <a class="page-link" th:href="@{/expends(size=${expenditures.size}, page=${pageNumber})}"
+                                   th:text="${pageNumber}"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:insert="comman/footer :: footer"></div>
+</body>
+</html>

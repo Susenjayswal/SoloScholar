@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>All Expenditures</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+</head>
+<body>
+    <div th:insert="comman/header :: header"></div>
+    <div class="container my-2">
+        <div class="container my-5">
+            <p class="my-5">
+                <a href="/addContact" class="btn btn-dark">
+                    <i class="fas fa-user-plus ml-2"> Add Contatcs </i>
+                </a>
+            </p>
+            <div class="col-md-12">
+                <h2 th:if="${contacts.content.isEmpty()}">No record found !!</h2>
+                <div th:unless="${contacts.content.isEmpty()}">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Date</th>
+                                <th>Name</th>                                
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Message</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="contact : ${contacts.content}">
+                                <td th:text="${contact.id}"></td>
+                                <td th:text="${contact.date}"></td>
+                                <td th:text="${contact.name}"></td>
+                                <td th:text="${contact.email}"></td>
+                                <td th:text="${contact.phone}"></td>
+                                <td th:text="${contact.message}"></td>
+                                  
+                              
+                                
+                               
+                                <td>
+                                    <a th:href="@{/remove-contact/{id}(id=${contact.id})}" class="btn btn-danger">
+                                        <i class="fas fa-user-times ml-2"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div th:if="${contacts.totalPages > 1}" class="pagination">
+                        <ul class="pagination">
+                            <li th:each="pageNumber : ${pageNumbers}" 
+                                th:classappend="${pageNumber == contacts.number + 1} ? 'active'">
+                                <a class="page-link" th:href="@{/contact(size=${contacts.size}, page=${pageNumber})}"
+                                   th:text="${pageNumber}"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:insert="comman/footer :: footer"></div>
+</body>
+</html>
