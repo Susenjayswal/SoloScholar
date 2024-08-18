@@ -37,7 +37,7 @@ public class ExpenditureServiceImpl implements ExpenditureService {
 	@Override
 	public Expenditure findExpenditureById(Long id) {
 		return expenditureRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException(String.format("expenditure not found with ID %d", id)));
+				.orElseThrow(() -> new NotFoundException(String.format("Expenditure not found with ID %d", id)));
 	}
 
 	@Override

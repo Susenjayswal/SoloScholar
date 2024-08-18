@@ -18,47 +18,44 @@
 	<div th:insert="comman/header :: header"></div>
 	<div class="container my-2">
 
-		<div th:switch="${authors}" class="container my-5">
+		<div th:switch="${books}" class="container my-5">
 			<p class="my-5">
-				<a href="/addAuthor" class="btn btn-dark"> <i
-					class="fas fa-user-plus ml-2"> Add Authors </i></a>&nbsp;&nbsp;<!-- <a
-					href="/export/all-author" class="btn btn-info"> <i
-					class="fas fa-file-csv ml-2"> Export CSV </i></a> -->
+				
 			</p>
 			<div class="col-md-12">
 				<h2 th:case="null">No record found !!</h2>
 				<div th:case="*">
+
 					<table class="table table-bordered">
 						<thead>
 							<tr>
-								<th>Author Name</th>
+								<th>ISBN</th>
+								<th>Book Name</th>
+								<th>Serial Name</th>
 								<th>Description</th>
-								<th>Edit</th>
-								<th>Delete</th>
+								
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="author : ${authors}">
-								<td th:text="${author.name}"></td>
-								<td th:text="${author.description}"></td>
-								<td><a th:href="@{/updateAuthor/{id}(id=${author.id})}"
-									class="btn btn-warning"><i class="fas fa-user-edit ml-2"></i></a></td>
-								<td><a th:href="@{/remove-author/{id}(id=${author.id})}"
-									class="btn btn-danger"><i class="fas fa-user-times ml-2"></i></a></td>
+							<tr th:each="book : ${books}">
+								<td th:text="${book.isbn}"></td>
+								<td th:text="${book.name}"></td>
+								<td th:text="${book.serialName}"></td>
+								<td th:text="${book.description}"></td>
+								
 							</tr>
 						</tbody>
 					</table>
-					<div th:if="${authors.totalPages > 0}" class="pagination"
+					<div th:if="${books.totalPages > 0}" class="pagination"
 						th:each="pageNumber : ${pageNumbers}">
-						<a th:href="@{/authors(size=${authors.size}, page=${pageNumber})}"
+						<a th:href="@{/books(size=${books.size}, page=${pageNumber})}"
 							th:text=${pageNumber}
-							th:class="${pageNumber==authors.number + 1} ? active"></a>
+							th:class="${pageNumber==books.number + 1} ? active"></a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
 	<div th:insert="comman/footer :: footer"></div>
 </body>
 

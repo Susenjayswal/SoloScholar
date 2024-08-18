@@ -54,6 +54,24 @@ public class BookController {
 		return "list-books";
 	}
 
+	@RequestMapping({ "/booklist", "/" })
+	public String findAllBook(Model model, @RequestParam("page") Optional<Integer> page,
+			@RequestParam("size") Optional<Integer> size) {
+
+		var currentPage = page.orElse(1);
+		var pageSize = size.orElse(5);
+
+		var bookPage = bookService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
+
+		model.addAttribute("books", bookPage);
+
+		var totalPages = bookPage.getTotalPages();
+		if (totalPages > 0) {
+			var pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+			model.addAttribute("pageNumbers", pageNumbers);
+		}
+		return "booklist";
+	}
 	@GetMapping("/searchBook")
 	public String searchBook(@Param("keyword") String keyword, Model model) {
 

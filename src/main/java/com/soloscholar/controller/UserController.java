@@ -33,7 +33,7 @@ public class UserController {
 	        return "user"; // Returns the view for user home
 	    }
 	@GetMapping("/users")
-	public String findAllAuthors(Model model, @RequestParam("page") Optional<Integer> page,
+	public String findAllUsers(Model model, @RequestParam("page") Optional<Integer> page,
 			@RequestParam("size") Optional<Integer> size) {
 
 		var currentPage = page.orElse(1);

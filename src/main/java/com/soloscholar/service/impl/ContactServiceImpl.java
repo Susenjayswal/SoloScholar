@@ -38,7 +38,7 @@ public class ContactServiceImpl implements ContactService {
 	@Override
 	public Contact findContactById(Long id) {
 		return contactRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException(String.format("expenditure not found with ID %d", id)));
+				.orElseThrow(() -> new NotFoundException(String.format("Contact not found with ID %d", id)));
 	}
 
 	@Override
@@ -54,7 +54,7 @@ public class ContactServiceImpl implements ContactService {
 	@Override
 	public void deleteContact(Long id) {
 		var contact = contactRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException(String.format("Expenditure not found with ID %d", id)));
+				.orElseThrow(() -> new NotFoundException(String.format("Contact not found with ID %d", id)));
 
 		contactRepository.deleteById(contact.getId());
 	}

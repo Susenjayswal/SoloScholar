@@ -6,8 +6,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.transaction.Transactional;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -18,7 +16,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.soloscholar.entity.Role;
 import com.soloscholar.entity.User;
 import com.soloscholar.exception.NotFoundException;
 import com.soloscholar.repository.UserRepository;
@@ -52,13 +49,11 @@ public class UserServiceImpl implements UserService {
 	            .collect(Collectors.toList());
 	}
 
-	//@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 	@Override
 	public List<User> findAllusers() {
 		return userRepository.findAll();
 	}
 
-	//@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 	@Override
 	public User findUserById(Long id) {
 		return userRepository.findById(id)
