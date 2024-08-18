@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Add Authors</title>
+    <title>Add Reader</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -65,10 +65,10 @@
 <body>
     <div th:insert="comman/header :: header"></div>
     <div class="container my-5">
-        <h3>Add User</h3>
+        <h3>Add Reader</h3>
         <div class="card-body">
             <div class="col-md-10">
-                <form action="#" th:action="@{/add-user}" th:object="${user}" method="post"
+                <form th:action="@{/add-reader}" th:object="${reader}" method="post"
                       onsubmit="return validateForm()">
                     <div class="row">
                         <div class="form-group col-md-8">
@@ -116,13 +116,24 @@
                             </select>
                             <span th:errors="*{gender}"></span>
                         </div>
+                         <div class="form-group col-md-8">
+                            <label for="qualification" class="col-form-label">Qualification</label>
+                            <select th:field="*{qualification}" class="form-control" id="qualification">
+                            	<option value="">Select Qualification</option>
+                            	<option value="High School">High School</option>
+                            	<option value="Graduation">Graduation</option>
+                            	<option value="Post Graduation">Post Graduation</option>
+                            	<option value="Diploma">Diploma</option>
+                            </select>
+                            <span th:errors="*{qualification}"></span>
+                        </div>
                         <div class="form-group col-md-8">
                             <label for="idtype" class="col-form-label">ID type</label>
                             <select th:field="*{idtype}" class="form-control" id="idtype">
                             	<option value="">Select ID Type</option>
                             	<option value="aadhar">Aadhar Number</option>
                             	<option value="pan">PAN Number</option>
-                            	<option value="passport">Passport NUmber</option>
+                            	<option value="passport">Passport Number</option>
                             	<option value="dl">Driving License Number</option>
                             </select>
                             <span th:errors="*{idtype}"></span>
@@ -133,31 +144,31 @@
                                    placeholder="ID Number"/>
                             <span th:errors="*{idnum}"></span>
                         </div>
-                        <div class="form-group col-md-8">
-                            <label for="role" class="col-form-label">Role</label>
+                         <div class="form-group col-md-8">
+                            <label for="roles" class="col-form-label">Role</label>
                             <select th:field="*{roles}" class="form-control" id="roles">
                             	<option value="">Select Role</option>
-                            	<option value="admin">Admin</option>
-                            	<option value="staff">Staff</option>
-                            	<option value="reader">Reader</option>                           
+                            	<option value="Reader">Reader</option>
                             </select>
                             <span th:errors="*{roles}"></span>
                         </div>
+                    
                         <div class="form-group col-md-8">
                             <label for="password" class="col-form-label">Password</label>
                             <input type="password" th:field="*{password}" class="form-control" id="password"
                                    placeholder="Password"/>
                             <span th:errors="*{password}"></span>
                         </div>
-                        <div class="form-group col-md-8">
-                            <label for="confirmpassword" class="col-form-label">Confirm Password</label>
-                            <input type="password" class="form-control" id="confirmpassword"
+                         <div class="form-group col-md-8">
+                            <label for="confirmPassword" class="col-form-label">Confirm Password</label>
+                            <input type="password"  class="form-control" id="confirmpassword"
                                    placeholder="Confirm Password"/>
-                            <span th:errors="*{password}"></span>
+                            <span ></span>
                         </div>
-                        <div class="col-md-6">
-                            <input type="submit" class="btn btn-success" value="Submit"/>
-                        </div>
+                       
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </form>
             </div>

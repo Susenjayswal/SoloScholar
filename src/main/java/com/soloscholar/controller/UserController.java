@@ -23,6 +23,15 @@ public class UserController {
 		this.userService = userService;
 	}
 
+	@GetMapping("/admin-login")
+    public String adminDashboard() {
+        return "admin"; // Returns the view for admin dashboard
+    }
+	
+	 @GetMapping("/user-login")
+	    public String userHome() {
+	        return "user"; // Returns the view for user home
+	    }
 	@GetMapping("/users")
 	public String findAllAuthors(Model model, @RequestParam("page") Optional<Integer> page,
 			@RequestParam("size") Optional<Integer> size) {
@@ -42,7 +51,7 @@ public class UserController {
 	}
 
 	@PostMapping("/user/{id}")
-	public String findAuthorById(@PathVariable("id") Long id, Model model) {
+	public String findUserById(@PathVariable("id") Long id, Model model) {
 
 		model.addAttribute("user", userService.findUserById(id));
 		return "list-user";

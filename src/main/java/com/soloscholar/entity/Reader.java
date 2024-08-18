@@ -1,34 +1,25 @@
 package com.soloscholar.entity;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
-@Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
-public class User {
+@Table(name = "reader", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+public class Reader {
 
 	
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@NotBlank(message="First Name is required")
@@ -43,12 +34,12 @@ public class User {
 	private String email;
 	
 	@NotBlank(message="Id Type is required")
-	private String Idtype;
+	private String idType;
 	
 	
 	@NotBlank(message="Id Number is required")
 	@Column(unique = true)
-	private String Idnum;
+	private String idNum;
 	
 	@NotNull(message="Phone number is required")
 	//@Size(min=10,max=10)
@@ -56,7 +47,7 @@ public class User {
 	private Long phone;
 	
 	@NotNull(message="Age is required")
-	//@Size(min=18,max=60)
+	//@Size(min=12,max=60)
 	private int age;
 	
 	@NotBlank(message="Gender is required")
@@ -65,41 +56,49 @@ public class User {
 	@NotBlank(message="Address is required")
 	private String address;	
 	
+	@NotBlank(message="Qualification is required")
+	private String qualification;
 	
 	private String password;
 
 	//@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	//@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+	//@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "reader_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
 
 	private String roles;
 
-	public User() {
+	public Reader() {
 
 	}
 
-	public User(Long id, @NotBlank(message = "First Name is required") String firstName,
+	
+
+	public Reader(Long id, @NotBlank(message = "First Name is required") String firstName,
 			@NotBlank(message = "Last Name is required") String lastName,
 			@NotBlank(message = "Email is required") @Email String email,
 			@NotBlank(message = "Id Type is required") String idtype,
 			@NotBlank(message = "Id Number is required") String idnum,
-			@NotBlank(message = "Phone number is required") @Size(min = 10, max = 10) Long phone,
-			@NotBlank(message = "Age is required") @Size(min = 18, max = 60) int age,
+			@NotNull(message = "Phone number is required") Long phone, @NotNull(message = "Age is required") int age,
 			@NotBlank(message = "Gender is required") String gender,
-			@NotBlank(message = "Address is required") String address, String password, String roles) {
+			@NotBlank(message = "Address is required") String address,
+			@NotBlank(message = "Qualification is required") String qualification, String password,
+			String roles) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		this.Idtype = idtype;
-		this.Idnum = idnum;
+		this.idType = idtype;
+		this.idNum = idnum;
 		this.phone = phone;
 		this.age = age;
 		this.gender = gender;
 		this.address = address;
-		this.password = encryptPassword(password);
+		this.qualification = qualification;
+		this.password = password;
 		this.roles = roles;
 	}
+
+
 
 	public Long getId() {
 		return id;
@@ -148,19 +147,19 @@ public class User {
 	
 
 	public String getIdtype() {
-		return Idtype;
+		return idType;
 	}
 
 	public void setIdtype(String idtype) {
-		Idtype = idtype;
+		idType = idtype;
 	}
 
 	public String getIdnum() {
-		return Idnum;
+		return idNum;
 	}
 
 	public void setIdnum(String idnum) {
-		Idnum = idnum;
+		idNum = idnum;
 	}
 
 	public Long getPhone() {
@@ -200,7 +199,19 @@ public class User {
 	}
 
 	public void setRoles(String roles) {
-	    this.roles=roles;
+	   this.roles="reader";
+	}
+
+
+
+	public String getQualification() {
+		return qualification;
+	}
+
+
+
+	public void setQualification(String qualification) {
+		this.qualification = qualification;
 	}
 	
 }

@@ -18,27 +18,30 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.soloscholar.entity.Reader;
 import com.soloscholar.entity.Role;
 import com.soloscholar.entity.User;
 import com.soloscholar.exception.NotFoundException;
+import com.soloscholar.repository.ReaderRepository;
 import com.soloscholar.repository.UserRepository;
+import com.soloscholar.service.ReaderService;
 import com.soloscholar.service.UserService;
 
 
 
 @Service
-public class UserServiceImpl implements UserService {
+public class ReaderServiceImpl implements ReaderService {
 
-	private final UserRepository userRepository;
+	private final ReaderRepository readerRepository;
 
-	public UserServiceImpl(UserRepository userRepository) {
-		this.userRepository = userRepository;
+	public ReaderServiceImpl(ReaderRepository readerRepository) {
+		this.readerRepository = readerRepository;
 	}
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		var user = userRepository.findByEmail(username);
+		var user = readerRepository.findByEmail(username);
 		if (user == null) {
 			throw new UsernameNotFoundException("Invalid username or password.");
 		}
@@ -50,60 +53,65 @@ public class UserServiceImpl implements UserService {
 	    return Arrays.stream(roles.split(","))
 	            .map(role -> new SimpleGrantedAuthority(role.trim()))
 	            .collect(Collectors.toList());
+	
+	}
+
+
+
+	//@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+	@Override
+	public List<Reader> findAllReaders() {
+		return readerRepository.findAll();
 	}
 
 	//@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 	@Override
-	public List<User> findAllusers() {
-		return userRepository.findAll();
-	}
-
-	//@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
-	@Override
-	public User findUserById(Long id) {
-		return userRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException(String.format("User not found with ID %d", id)));
+	public Reader findReaderById(Long id) {
+		return readerRepository.findById(id)
+				.orElseThrow(() -> new NotFoundException(String.format("Reader not found with ID %d", id)));
 	}
 
 	@Override
-	public void createUser(User user) {
-		userRepository.save(user);
+	public void createReader(Reader reader) {
+		readerRepository.save(reader);
 	}
 
 	
 
 	@Override
-	public void deleteUser(Long id) {
-		var User = userRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException(String.format("User not found with ID %d", id)));
+	public void deleteReader(Long id) {
+		var Reader = readerRepository.findById(id)
+				.orElseThrow(() -> new NotFoundException(String.format("Reader not found with ID %d", id)));
 
-		userRepository.deleteById(User.getId());
+		readerRepository.deleteById(Reader.getId());
 	}
 
-
+	 public Reader findReaderByEmail(String email) {
+	        return readerRepository.findByEmail(email);
+	    }
 	
 
 	@Override
-	public void updateUser(User user) {
-		userRepository.save(user);
+	public void updateReader(Reader reader) {
+		readerRepository.save(reader);
 		
 	}
 
 	@Override
-	public Page<User> findPaginated(Pageable pageable) {
+	public Page<Reader> findPaginated(Pageable pageable) {
 		var pageSize = pageable.getPageSize();
 		var currentPage = pageable.getPageNumber();
 		var startItem = currentPage * pageSize;
-		List<User> list;
+		List<Reader> list;
 
-		if (findAllusers().size() < startItem) {
+		if (findAllReaders().size() < startItem) {
 			list = Collections.emptyList();
 		} else {
-			var toIndex = Math.min(startItem + pageSize, findAllusers().size());
-			list = findAllusers().subList(startItem, toIndex);
+			var toIndex = Math.min(startItem + pageSize, findAllReaders().size());
+			list = findAllReaders().subList(startItem, toIndex);
 		}
 
-		return new PageImpl<User>(list, PageRequest.of(currentPage, pageSize), findAllusers().size());
+		return new PageImpl<Reader>(list, PageRequest.of(currentPage, pageSize), findAllReaders().size());
 	
 	}
 

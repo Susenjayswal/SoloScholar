@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>All Readers</title>
+        <!-- Favicon -->
+    <link th:href="@{/logo.jpg}" rel="icon" type="image/jpg">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+</head>
+<body>
+
+    <div th:insert="comman/header :: header"></div>
+    <div class="container my-2">
+        <div th:if="${readers != null}" class="container my-5">
+            <p class="my-5">
+                <a href="/addReader" class="btn btn-dark"> <i class="fas fa-user-plus ml-2"> Add Reader </i></a>&nbsp;&nbsp;
+            </p>
+            <div class="col-md-12">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Reader id</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Address</th>
+                            <th>Age</th>
+                            <th>Gender</th>
+                            <th>Id type</th>
+                            <th>Id Number</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="reader : ${readers}">
+                            <td th:text="${reader.id}"></td>
+                            <td th:text="${reader.firstName }+ ' '+ ${reader.lastName}"></td>
+                            <td th:text="${reader.email}"></td>
+                            <td th:text="${reader.phone}"></td>
+                            <td th:text="${reader.address}"></td>
+                            <td th:text="${reader.age}"></td>
+                            <td th:text="${reader.gender}"></td>
+                            <td th:text="${reader.idtype}"></td>
+                            <td th:text="${reader.idnum}"></td>
+                            <td><a th:href="@{/updateReader/{id}(id=${reader.id})}" class="btn btn-warning"><i class="fas fa-user-edit ml-2"></i></a></td>
+                            <td><a th:href="@{/removeReader/{id}(id=${reader.id})}" class="btn btn-danger"><i class="fas fa-user-times ml-2"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div th:if="${readers.totalPages > 0}" class="pagination">
+                    <a th:each="pageNumber : ${#numbers.sequence(1, readers.totalPages)}" th:href="@{/readers(size=${readers.size}, page=${pageNumber})}" th:text="${pageNumber}" th:class="${pageNumber==readers.number + 1} ? active"></a>
+                </div>
+            </div>
+        </div>
+        <div th:if="${readers == null}">
+            <h2>No record found !!</h2>
+        </div>
+    </div>
+    <div th:insert="comman/footer :: footer"></div>
+</body>
+</html>

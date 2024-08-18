@@ -9,6 +9,7 @@ import com.soloscholar.entity.Category;
 import com.soloscholar.entity.Contact;
 import com.soloscholar.entity.Expenditure;
 import com.soloscholar.entity.Publisher;
+import com.soloscholar.entity.Reader;
 import com.soloscholar.entity.User;
 import com.soloscholar.vo.AuthorRecord;
 import com.soloscholar.vo.BookRecord;
@@ -16,6 +17,7 @@ import com.soloscholar.vo.CategoryRecord;
 import com.soloscholar.vo.ContactRecord;
 import com.soloscholar.vo.ExpenditureRecord;
 import com.soloscholar.vo.PublisherRecord;
+import com.soloscholar.vo.ReaderRecord;
 import com.soloscholar.vo.UserRecord;
 
 public class Mapper {
@@ -108,6 +110,25 @@ public class Mapper {
 	            vo.getPassword()
 	        );
 	        return uservo;
+	        		}).collect(Collectors.toList());
+	}
+	public static List<ReaderRecord> readerModelToVo(List<Reader> readers) {
+	    return readers.stream().map(vo -> {
+	        var readervo= new ReaderRecord(
+	            vo.getId(), 
+	            vo.getFirstName(), 
+	            vo.getLastName(), 
+	            vo.getAddress(), 
+	            vo.getEmail(), 
+	            vo.getAge(),
+	            vo.getPhone(),
+	            vo.getGender(),
+	            vo.getIdtype(),
+	            vo.getIdnum(),
+	            vo.getRoles(),
+	            vo.getPassword()
+	        );
+	        return readervo;
 	        		}).collect(Collectors.toList());
 	}
 
