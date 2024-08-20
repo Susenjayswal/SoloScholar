@@ -9,15 +9,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+ <script>
+    function goBack() {
+        window.history.back();
+    }
+    </script>
 </head>
 <body>
     <div th:insert="comman/header :: header"></div>
+    <button onclick="goBack()">Go Back</button><br>
     <div class="container my-2">
         <div class="container my-5">
             <p class="my-5">
-                <a href="/addContact" class="btn btn-dark">
+                <!-- <a href="/addContact" class="btn btn-dark">
                     <i class="fas fa-user-plus ml-2"> Add Contatcs </i>
                 </a>
+                 --><!-- <a href="/admin-login" class="btn btn-dark"> <i class="fas fa-user ml-2"> Admin-Dashboard </i></a>
+				<a href="/user-login" class="btn btn-dark"> <i class="fas fa-user ml-2"> Staff-Dashboard </i></a> -->
             </p>
             <div class="col-md-12">
                 <h2 th:if="${contacts.content.isEmpty()}">No record found !!</h2>
@@ -41,8 +49,7 @@
                                 <td th:text="${contact.name}"></td>
                                 <td th:text="${contact.email}"></td>
                                 <td th:text="${contact.phone}"></td>
-                                <td th:text="${contact.message}"></td>
-                                  
+                                <td th:text="${contact.message}"></td>                            
                               
                                 
                                

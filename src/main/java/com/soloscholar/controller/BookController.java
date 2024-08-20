@@ -97,7 +97,7 @@ public class BookController {
 	}
 
 	@PostMapping("/add-book")
-	public String createBook(@Valid @ModelAttribute Book book, BindingResult result, Model model) {
+	public String createBook(@Valid @ModelAttribute("book") Book book, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			model.addAttribute("categories", categoryService.findAllCategories());
 			model.addAttribute("authors", authorService.findAllAuthors());
@@ -118,7 +118,7 @@ public class BookController {
 	}
 
 	@PutMapping("/update-book/{id}")
-	public String updateBook(@PathVariable("id") Long id, Book book, BindingResult result, Model model) {
+	public String updateBook(@Valid @ModelAttribute("book") @PathVariable("id") Long id, Book book, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			book.setId(id);
 			return "update-book";

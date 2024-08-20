@@ -4,6 +4,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import javax.validation.Valid;
+
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,12 +59,12 @@ public class ContactController {
 	}
 
 	@PostMapping("/add-contact")
-	public String createContact(Contact contact, BindingResult result, Model model) {
+	public String createContact(@Valid @ModelAttribute("contacts") Contact contact, BindingResult result, Model model) {
 		
 
-		try{contactService.createContact(contact);
+		contactService.createContact(contact);
 		model.addAttribute("contacts", contactService.findAllContact());
-		}catch(Exception e) {System.out.println("Error "+ e);}
+		
 		return "redirect:/";
 	}
 
@@ -86,7 +88,7 @@ public class ContactController {
 	}
 
 	@RequestMapping("/remove-contact/{id}")
-	public String deleteExpenditure(@PathVariable("id") Long id, Model model) {
+	public String deleteExpenditure(@Valid @ModelAttribute("contact") @PathVariable("id") Long id, Model model) {
 		contactService.deleteContact(id);
 
 		model.addAttribute("contact", contactService.findAllContact());

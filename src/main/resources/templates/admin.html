@@ -86,7 +86,7 @@
    <!-- Header and Navbar -->
    <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" th:href="@{/admin-login}">
+        <a class="navbar-brand" th:href="@{/}">
             <img th:src="@{/images/logo.jpg}" alt="Logo">Solo Scholar
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -115,11 +115,12 @@
  <div class="main-content">
     <div class="button-grid">
         <button type="button" class="btn btn-primary" th:onclick="|location.href='@{/users}'|">User</button>
-        <button type="button" class="btn btn-primary" th:onclick="|location.href='@{/readers}'|">Student</button>
+        <button type="button" class="btn btn-primary" th:onclick="|location.href='@{/readers}'|">Reader</button>
         <button type="button" class="btn btn-primary" th:onclick="|location.href='@{/books}'|">Books</button>
         <button type="button" class="btn btn-primary" th:onclick="|location.href='@{/authors}'|">Author</button>
         <button type="button" class="btn btn-primary" th:onclick="|location.href='@{/publishers}'|">Publisher</button>
         <button type="button" class="btn btn-primary" th:onclick="|location.href='@{/categories}'|">Category</button>
+        <button type="button" class="btn btn-primary" th:onclick="|location.href='@{/contacts}'|">Contact</button>
     </div>
 </div>
 

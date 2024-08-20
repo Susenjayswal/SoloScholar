@@ -32,13 +32,16 @@ public class User {
 	private Long id;
 
 	@NotBlank(message="First Name is required")
+	@Size(min=5)
 	private String firstName;
 
 	@NotBlank(message="Last Name is required")
+	@Size(min=5)
 	private String lastName;
 
 	@NotBlank(message="Email is required")
 	@Email
+	@Size(min=15)
 	@Column(unique = true)
 	private String email;
 	
@@ -51,33 +54,30 @@ public class User {
 	private String Idnum;
 	
 	@NotNull(message="Phone number is required")
-	//@Size(min=10,max=10)
 	@Column(unique = true)
 	private Long phone;
 	
 	@NotNull(message="Age is required")
-	//@Size(min=18,max=60)
 	private int age;
 	
 	@NotBlank(message="Gender is required")
 	private String gender;
 	
 	@NotBlank(message="Address is required")
+	@Size(min=15)
 	private String address;	
 	
 	
+	@NotBlank(message = "Password is required")
+	@Size(min=8, message="Minimum 8 characters is required")
 	private String password;
-
-	//@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	//@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-
 	private String roles;
 
 	public User() {
 
 	}
 
-	public User(Long id, @NotBlank(message = "First Name is required") String firstName,
+	public User(@NotBlank(message = "First Name is required") String firstName,
 			@NotBlank(message = "Last Name is required") String lastName,
 			@NotBlank(message = "Email is required") @Email String email,
 			@NotBlank(message = "Id Type is required") String idtype,

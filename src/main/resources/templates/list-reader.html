@@ -11,13 +11,19 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
-
+ <script>
+    function goBack() {
+        window.history.back();
+    }
+    </script>
 </head>
 <body>
 	<div th:insert="comman/header :: header"></div>
+	<button onclick="goBack()">Go Back</button><br>
 	<div class="container my-2">
 		<div class="card">
 			<div class="card-body">
+			<a href="/reader-login" class="btn btn-dark"> <i class="fas fa-user ml-2"> Reader-Dashboard </i></a>
 				<div class="container my-5">
 					<div class="col-md-12">
 						<div>

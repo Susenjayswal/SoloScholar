@@ -26,11 +26,15 @@
             });
             return isValid;
         }
+        function goBack() {
+            window.history.back();
+        }
     </script>
 </head>
 
 <body>
 <div th:insert="comman/header :: header"></div>
+<button onclick="goBack()">Go Back</button><br>
 <div class="container my-5">
     <h3>Add Category</h3>
     <div class="card">
@@ -42,8 +46,8 @@
                         <div class="form-group col-md-8">
                             <label for="name" class="col-form-label">Category Name</label>
                             <input type="text" th:field="*{name}" class="form-control" id="name"
-                                   placeholder="Category Name"/>
-                            <span></span>
+                                   placeholder="Category Name" required/>
+                             <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></span>
                         </div>
                         <div class="col-md-6">
                             <input type="submit" class="btn btn-success" value=" Submit ">

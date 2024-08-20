@@ -52,7 +52,7 @@ public class Mapper {
 	public static List<PublisherRecord> publisherModelToVo(List<Publisher> publishers) {
 
 		return publishers.stream().map(vo -> {
-			var publisherVo = new PublisherRecord(vo.getId(), vo.getName());
+			var publisherVo = new PublisherRecord(vo.getId(), vo.getName(), vo.getAddress());
 			return publisherVo;
 		}).collect(Collectors.toList());
 

@@ -26,6 +26,9 @@
             });
             return isValid;
         }
+        function goBack() {
+            window.history.back();
+        }
     </script>
      <style>
         /* Your existing CSS styles */
@@ -122,6 +125,7 @@
         </div>
     </nav>
 <div class="container my-5">
+<button onclick="goBack()">Go Back</button><br>
     <h3>Add Publisher</h3>
     <div class="card">
         <div class="card-body">
@@ -132,27 +136,28 @@
                         <div class="form-group col-md-8">
                             <label for="name" class="col-form-label">Name</label>
                             <input type="text" th:field="*{name}" class="form-control" id="name"
-                                   placeholder="Name"/>
-                            <span></span>
+                                   placeholder="Name" required/>
+                             <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></span>
                         </div>
                           <div class="form-group col-md-8">
                             <label for="email" class="col-form-label">Name</label>
                             <input type="email" th:field="*{email}" class="form-control" id="email"
-                                   placeholder="Email ID"/>
-                            <span></span>
+                                   placeholder="Email ID" required/>
+                             <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="phone" class="col-form-label">Contact Number</label>
+                            <input type="number" th:field="*{phone}" class="form-control" id="phone"
+                                   placeholder="Contact Number" required/>
+                             <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" class="text-danger"></span>
                         </div>
                           <div class="form-group col-md-8">
                             <label for="message" class="col-form-label">Message</label>
                             <input type="text" th:field="*{message}" class="form-control" id="message"
-                                   placeholder="Message"/>
-                            <span></span>
+                                   placeholder="Message" required/>
+                             <span th:if="${#fields.hasErrors('message')}" th:errors="*{message}" class="text-danger"></span>
                         </div>
-                          <div class="form-group col-md-8">
-                            <label for="phone" class="col-form-label">Contact Number</label>
-                            <input type="number" th:field="*{phone}" class="form-control" id="phone"
-                                   placeholder="Contact Number"/>
-                            <span></span>
-                        </div>
+                          
                         <div class="col-md-6">
                             <input type="submit" class="btn btn-success" value=" Submit ">
                         </div>

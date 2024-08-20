@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "categories")
@@ -21,12 +23,15 @@ public class Category {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "name", length = 50, nullable = false, unique = true)
+	@NotBlank(message = "Name is required and more than five characters")
+	@Size(min=10)
+	@Column(name = "name", length = 50, nullable = false)
 	private String name;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "categories")
 	private Set<Book> books = new HashSet<Book>();
-
+	@NotBlank(message = "Category is required and more than five characters")
+	@Size(min=10)
 	public Category(String name) {
 		this.name = name;
 	}

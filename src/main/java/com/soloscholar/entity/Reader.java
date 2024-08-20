@@ -10,6 +10,8 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
@@ -23,13 +25,16 @@ public class Reader {
 	private Long id;
 
 	@NotBlank(message="First Name is required")
+	@Size(min=5)
 	private String firstName;
 
 	@NotBlank(message="Last Name is required")
+	@Size(min=5)
 	private String lastName;
 
 	@NotBlank(message="Email is required")
 	@Email
+	@Size(min=10)
 	@Column(unique = true)
 	private String email;
 	
@@ -42,18 +47,17 @@ public class Reader {
 	private String idNum;
 	
 	@NotNull(message="Phone number is required")
-	//@Size(min=10,max=10)
 	@Column(unique = true)
 	private Long phone;
 	
 	@NotNull(message="Age is required")
-	//@Size(min=12,max=60)
 	private int age;
 	
 	@NotBlank(message="Gender is required")
 	private String gender;
 	
 	@NotBlank(message="Address is required")
+	@Size(min=15)
 	private String address;	
 	
 	@NotBlank(message="Qualification is required")

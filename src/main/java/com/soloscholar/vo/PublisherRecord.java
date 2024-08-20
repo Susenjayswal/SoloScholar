@@ -1,5 +1,5 @@
 package com.soloscholar.vo;
 
-public record PublisherRecord(Long id, String name) {
+public record PublisherRecord(Long id, String name, String address) {
 
 }

@@ -4,6 +4,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import javax.validation.Valid;
+
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,7 +56,7 @@ public class ExpenditureController {
 	}
 
 	@PostMapping("/add-expenditure")
-	public String createExpenditure(Expenditure expenditure, BindingResult result, Model model) {
+	public String createExpenditure(@Valid @ModelAttribute("expenditure") Expenditure expenditure, BindingResult result, Model model) {
 		
 
 		try{expenditureService.createExpenditure(expenditure);
@@ -71,7 +73,7 @@ public class ExpenditureController {
 	}
 
 	@RequestMapping("/update-expenditure/{id}")
-	public String updateAuthor(@PathVariable("id") Long id, Expenditure expenditure, BindingResult result, Model model) {
+	public String updateAuthor(@Valid @ModelAttribute("expenditure") @PathVariable("id") Long id, Expenditure expenditure, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			expenditure.setId(id);
 			return "update-expenditure";

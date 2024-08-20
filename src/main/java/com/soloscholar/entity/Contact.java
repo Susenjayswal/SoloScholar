@@ -19,6 +19,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Size;
 
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters.LocalDateConverter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -31,13 +32,16 @@ public class Contact {
     private Long id;
 
     @NotBlank(message = "Name cannot be blank")
+    @Size(min=10)
     private String name;
 
     @NotBlank(message = "Email cannot be blank")
     @Email
+    @Size(min=15)
     private String email;
 
     @NotBlank(message = "Message cannot be blank")
+    @Size(min=10)
     private String message;
 
     @NotNull(message="Phone number is required")
@@ -88,11 +92,6 @@ public class Contact {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-
-
-
-
-
 	public void setDate() {
 		        this.date = LocalDate.now();
 	}

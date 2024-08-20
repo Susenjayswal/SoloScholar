@@ -1,9 +1,12 @@
 package com.soloscholar.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -42,7 +45,7 @@ public class CategoryController {
 	}
 
 	@RequestMapping("/add-category")
-	public String createCategory(Category category, BindingResult result, Model model) {
+	public String createCategory(@Valid @ModelAttribute("category")Category category, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return "add-category";
 		}
@@ -60,7 +63,7 @@ public class CategoryController {
 	}
 
 	@RequestMapping("/update-category/{id}")
-	public String updateCategory(@PathVariable("id") Long id, Category category, BindingResult result, Model model) {
+	public String updateCategory(@Valid @ModelAttribute("category") @PathVariable("id") Long id, Category category, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			category.setId(id);
 			return "update-category";

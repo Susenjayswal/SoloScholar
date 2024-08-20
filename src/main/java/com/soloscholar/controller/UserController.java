@@ -4,6 +4,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import javax.validation.Valid;
+
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -63,7 +65,7 @@ public class UserController {
 	}
 
 	@PostMapping("/add-user")
-	public String createAuthor(User user, BindingResult result, Model model) {
+	public String createAuthor(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return "add-user";
 		}
@@ -81,7 +83,7 @@ public class UserController {
 	}
 
 	@PostMapping("/update-user/{id}")
-	public String updateUser(@PathVariable("id") Long id, User user, BindingResult result, Model model) {
+	public String updateUser(@Valid @ModelAttribute("user") @PathVariable("id") Long id, User user, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			user.setId(id);
 			return "update-user";

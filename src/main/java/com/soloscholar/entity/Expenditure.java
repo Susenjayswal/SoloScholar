@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -16,12 +17,15 @@ public class Expenditure {
     private Long id;
 
     @NotBlank(message = "Invoice number cannot be blank")
+    
     private String invoiceNumber;
 
     @NotBlank(message = "Type cannot be blank")
+    @Size(min=5)
     private String type;
 
     @NotBlank(message = "Category cannot be blank")
+    @Size(min=5)
     private String category;
 
 
@@ -33,7 +37,6 @@ public class Expenditure {
     private int quantity;
 
     @Temporal(TemporalType.DATE)
-    //@NotNull(message = "Date cannot be null")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @PastOrPresent(message = "Date must be today or before")
     private Date date;

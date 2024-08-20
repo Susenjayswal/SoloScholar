@@ -23,10 +23,14 @@
             });
             return isValid;
         }
+        function goBack() {
+            window.history.back();
+        }
     </script>
 </head>
 <body>
 <div th:insert="comman/header :: header"></div>
+<button onclick="goBack()">Go Back</button><br>
 <div class="container my-5">
     <h3>Add Expenditure</h3>
     <div class="card">
@@ -39,39 +43,39 @@
                         <label for="invoiceNumber" class="col-form-label">Invoice Number</label>
                         <input type="text" th:field="*{invoiceNumber}" class="form-control" id="invoiceNumber"
                                placeholder="Invoice Number"/>
-                        <span></span>
+                        <span th:if="${#fields.hasErrors('invoiceNumber')}" th:errors="*{invoiceNumber}" class="text-danger"></span>
                     </div>
 
                     <div class="form-group col-md-8">
                         <label for="category" class="col-form-label">Category</label>
                         <input type="text" th:field="*{category}" class="form-control" id="category"
-                               placeholder="Category"/>
-                        <span></span>
+                               placeholder="Category" required/>
+                        <span th:if="${#fields.hasErrors('category')}" th:errors="*{category}" class="text-danger"></span>
                     </div>
 
                     <div class="form-group col-md-8">
                         <label for="type" class="col-form-label">Type</label>
-                        <input type="text" th:field="*{type}" class="form-control" id="type" placeholder="Type"/>
-                        <span></span>
+                        <input type="text" th:field="*{type}" class="form-control" id="type" placeholder="Type" required/>
+                        <span th:if="${#fields.hasErrors('type')}" th:errors="*{type}" class="text-danger"></span>
                     </div>
 
                     <div class="form-group col-md-8">
                         <label for="quantity" class="col-form-label">Quantity</label>
                         <input type="number" th:field="*{quantity}" class="form-control" id="quantity"
-                               placeholder="Quantity"/>
-                        <span></span>
+                               placeholder="Quantity" required/>
+                        <span th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}" class="text-danger"></span>
                     </div>
 
                     <div class="form-group col-md-8">
                         <label for="rate" class="col-form-label">Rate</label>
                         <input type="number" th:field="*{rate}" class="form-control" id="rate" placeholder="Rate"/>
-                        <span></span>
+                        <span th:if="${#fields.hasErrors('rate')}" th:errors="*{rate}" class="text-danger" required></span>
                     </div>
 
                     <div class="form-group col-md-8">
                         <label for="date" class="col-form-label">Purchase Date</label>
-                        <input type="date" th:field="*{date}" class="form-control" id="date" placeholder="Date"/>
-                        <span></span>
+                        <input type="date" th:field="*{date}" class="form-control" id="date" placeholder="Date" required/>
+                        <span th:if="${#fields.hasErrors('date')}" th:errors="*{date}" class="text-danger"></span>
                     </div>
 	
                     <div class="col-md-6">

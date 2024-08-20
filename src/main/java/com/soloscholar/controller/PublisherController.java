@@ -1,5 +1,7 @@
 package com.soloscholar.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,7 +40,7 @@ public class PublisherController {
 	}
 
 	@PostMapping("/add-publisher")
-	public String createPublisher(Publisher publisher, BindingResult result, Model model) {
+	public String createPublisher(@Valid @ModelAttribute("publisher") Publisher publisher, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return "add-publisher";
 		}
@@ -56,7 +58,7 @@ public class PublisherController {
 	}
 
 	@PostMapping("/update-publisher/{id}")
-	public String updatePublisher(@PathVariable("id") Long id, Publisher publisher, BindingResult result, Model model) {
+	public String updatePublisher(@Valid @ModelAttribute("publisher") @PathVariable("id") Long id, Publisher publisher, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			publisher.setId(id);
 			return "update-publishers";

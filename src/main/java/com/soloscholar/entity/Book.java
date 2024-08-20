@@ -26,7 +26,7 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "isbn", length = 50, nullable = false, unique = true)
+    @Column(name = "isbn", length = 50, nullable = false)
     @NotBlank(message = "ISBN is required")
     @Size(min = 10, max = 50, message = "ISBN must be between 10 and 50 characters")
     private String isbn;

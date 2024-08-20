@@ -4,6 +4,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import javax.validation.Valid;
+
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -81,7 +83,7 @@ public class ReaderController {
 	}
 
 	@PostMapping("/add-reader")
-	public String createReader(Reader reader, BindingResult result, Model model) {
+	public String createReader(@Valid @ModelAttribute("reader") Reader reader, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return "add-reader";
 		}
@@ -99,7 +101,7 @@ public class ReaderController {
 	}
 
 	@PostMapping("/update-reader/{id}")
-	public String updateUser(@PathVariable("id") Long id, Reader reader, BindingResult result, Model model) {
+	public String updateUser(@Valid @ModelAttribute("reader") @PathVariable("id") Long id, Reader reader, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			reader.setId(id);
 			return "update-reader";

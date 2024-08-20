@@ -16,8 +16,9 @@
 </head>
 <body>
 	<div th:insert="comman/header :: header"></div>
+	<button onclick="goBack()">Go Back</button><br>
 	<div class="container my-2">
-
+<a href="/reader-login" class="btn btn-dark"> <i class="fas fa-user-plus ml-2"> Reader-Dashboard </i></a>
 		<div th:switch="${books}" class="container my-5">
 			<p class="my-5">
 				

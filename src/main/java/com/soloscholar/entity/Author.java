@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "authors")
@@ -21,9 +23,12 @@ public class Author {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "name", length = 100, nullable = false, unique = true)
+	@NotBlank(message="Name is required")
+	@Size(min=5, message="Minimum 5 character is required")
+	@Column(name = "name", length = 100, nullable = false)
 	private String name;
 
+	@NotBlank(message="Description is required")
 	@Column(name = "description", length = 250, nullable = false)
 	private String description;
 

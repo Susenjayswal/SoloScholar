@@ -4,6 +4,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import javax.validation.Valid;
+
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,9 +53,10 @@ public class AuthorController {
 	public String showCreateForm(Author author) {
 		return "add-author";
 	}
+	
 
 	@RequestMapping("/add-author")
-	public String createAuthor(Author author, BindingResult result, Model model) {
+	public String createAuthor(@Valid @ModelAttribute("author") Author author, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return "add-author";
 		}
@@ -71,7 +74,7 @@ public class AuthorController {
 	}
 
 	@RequestMapping("/update-author/{id}")
-	public String updateAuthor(@PathVariable("id") Long id, Author author, BindingResult result, Model model) {
+	public String updateAuthor(@Valid @ModelAttribute("author") @PathVariable("id") Long id, Author author, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			author.setId(id);
 			return "update-author";

@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "publishers")
@@ -21,7 +23,9 @@ public class Publisher {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "name", length = 100, nullable = false, unique = true)
+	@NotBlank(message = "Name is required")
+	@Size(min=5)
+	@Column(name = "name", length = 100, nullable = false)
 	private String name;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "publishers")
@@ -30,6 +34,10 @@ public class Publisher {
 	public Publisher(String name) {
 		this.name = name;
 	}
+	@NotBlank(message = "Address is required")
+	@Size(min=5)
+	@Column(name = "address", length = 100, nullable = false)
+	private String address;
 
 	public Long getId() {
 		return id;
@@ -57,6 +65,14 @@ public class Publisher {
 
 	public Publisher() {
 		super();
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 }

@@ -9,14 +9,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+ <script>
+    function goBack() {
+        window.history.back();
+    }
+    </script>
 </head>
 <body>
 
     <div th:insert="comman/header :: header"></div>
+    <button onclick="goBack()">Go Back</button><br>
     <div class="container my-2">
         <div th:if="${users != null}" class="container my-5">
             <p class="my-5">
                 <a href="/addUser" class="btn btn-dark"> <i class="fas fa-user-plus ml-2"> Add User </i></a>&nbsp;&nbsp;
+               <!--  <a href="/admin-login" class="btn btn-dark"> <i class="fas fa-user ml-2"> Admin-Dashboard </i></a>
+				<a href="/user-login" class="btn btn-dark"> <i class="fas fa-user ml-2"> Staff-Dashboard </i></a> -->
             </p>
             <div class="col-md-12">
                 <table class="table table-bordered">
