@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Uploaded Documents</title>
+</head>
+<body>
+<h2>Uploaded Documents</h2>
+<table>
+    <thead>
+    <tr>
+        <th>File Name</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="document : ${documents}">
+        <td th:text="${document.fileName}"></td>
+        <td>
+            <a th:href="@{/{id}(id=${document.id})}" target="_blank">
+                <button>View</button>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

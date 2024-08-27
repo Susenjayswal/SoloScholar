@@ -94,7 +94,7 @@
                         </div>
                          <div class="form-group col-md-8">
                             <label for="phone" class="col-form-label">Contact Number</label>
-                            <input type="number" th:field="*{phone}" class="form-control" id="phone"
+                            <input type="tel" th:field="*{phone}" class="form-control" pattern="[6-9]{1}[0-9]{7}" id="phone"
                                    placeholder="Phone Number" required/>
                             <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" class="text-danger"></span>
                         </div>
